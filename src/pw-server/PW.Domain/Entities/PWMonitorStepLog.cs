@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static AuthApi.Data.Entities.PWMonitorStep;
+using static PW.Domain.Entities.PWMonitorStep;
 
-namespace AuthApi.Data.Entities
+namespace PW.Domain.Entities
 {
     public class PWMonitorStepLog
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AuthApi.Data.Entities
+namespace PW.Domain.Entities
 {
     public class PWMonitor
     {

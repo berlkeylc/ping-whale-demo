@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace AuthApi.Data.Entities
+namespace PW.Domain.Entities
 {
     public class PWUser : IdentityUser
     {
