@@ -1,0 +1,84 @@
+### --- .NET / ASP.NET Core ---
+# Build results
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+[Dd]ebug/
+[Rr]elease/
+[Tt]emp/
+[Tt]est[Rr]esult*/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio specific
+.vs/
+.vscode/
+.idea/
+
+# Backup & Cache
+*.bak
+*.cache
+*.pdb
+*.tmp
+
+# Configuration files
+appsettings.*.json
+!appsettings.json  # Keep the base file
+secrets.json
+.env
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+*.dll
+*.exe
+
+### --- Angular / Frontend ---
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log*
+
+# Angular build outputs
+dist/
+build/
+tmp/
+temp/
+coverage/
+
+# IDE files
+*.swp
+*.swo
+*.idea/
+*.DS_Store
+
+# Environment files
+/src/environments/environment.prod.ts
+/src/environments/environment.ts
+
+### --- General ---
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs
+*.log
+
+# Other
+*.db
+*.sqlite
+*.local
