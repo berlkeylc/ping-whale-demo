@@ -24,6 +24,7 @@ public static class ServiceRegistration
         services.AddScoped<IPWMonitorStepRepository, PWMonitorStepRepository>();
         services.AddScoped<IPWMonitorStepLogRepository, PWMonitorStepLogRepository>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IMonitorService, MonitorService>();
 
         }
     }

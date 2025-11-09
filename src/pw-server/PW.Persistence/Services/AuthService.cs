@@ -27,7 +27,7 @@ public class AuthService : IAuthService
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, password))
             {
-                return string.Empty;
+                throw new Exception("Invalid email or password.");
             }
 
             var token = await GenerateJwtToken(user);
@@ -40,7 +40,8 @@ public class AuthService : IAuthService
          var existingUser = await _userManager.FindByEmailAsync(email);
             if (existingUser != null)
             {
-                return string.Empty;
+                throw new Exception("User with this email already exists.");
+
             }
 
             var user = new PWUser
@@ -53,7 +54,7 @@ public class AuthService : IAuthService
 
             if (!result.Succeeded)
             {
-            return string.Empty;
+                throw new Exception("Failed to create user: " + string.Join(", ", result.Errors.Select(e => e.Description)));
             }
 
             var token = await GenerateJwtToken(user);
