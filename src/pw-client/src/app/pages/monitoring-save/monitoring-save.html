@@ -29,7 +29,8 @@
           id="url"
           [(ngModel)]="model.url" 
           placeholder="https://example.com"
-          class="form-input">
+          class="form-input"
+          [disabled]="isEditMode">
       </div>
 
       <div class="form-actions">

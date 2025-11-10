@@ -24,6 +24,10 @@ export class MonitoringSave implements OnInit {
     private spinnerService: SpinnerService
   ) {}
 
+  get isEditMode(): boolean {
+    return !!this.model.id;
+  }
+
   get title(): string {
     const id = this.route.snapshot.queryParams['id'];
     return id ? (this.model.name || 'Edit Monitoring') : 'New Monitoring';
