@@ -14,8 +14,8 @@
                     formControlName="email"
                   />
         <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
-          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email zorunlu</div>
-          <div *ngIf="registerForm.get('email')?.errors?.['email']">Geçerli bir email girin</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid Email.</div>
         </div>
                 </div>
                 <div class="ud-form-group">
@@ -25,8 +25,8 @@
                         formControlName="password"
                     />
                     <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
-                    <div *ngIf="registerForm.get('password')?.errors?.['required']">Şifre zorunlu</div>
-                    <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Şifre en az 6 karakter olmalı</div>
+                    <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is Required.</div>
+                    <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password should be at least 6 character.</div>
                     </div>
                 </div>
                  <div class="ud-form-group">
@@ -36,7 +36,7 @@
                         formControlName="confirmPassword"
                     />
                        <div class="error" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.hasError('passwordMismatch')">
-                        Şifreler eşleşmiyor
+                        Passwords do not match.
                         </div>
                 </div>
                 <div class="api-error" >{{ apiError() }}</div>

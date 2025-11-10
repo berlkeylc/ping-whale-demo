@@ -32,7 +32,7 @@ loginForm!: FormGroup;
     this.auth.login(email!, password!).subscribe({
       next: () => this.router.navigate(['/dashboard']),
       error: (err) => {
-        this.apiError.set(err?.error?.message || 'Giriş yapılamadı');
+        this.apiError.set(err?.error?.Message || 'An unexpected error occurred. Please try again.');
       }
     });
   }

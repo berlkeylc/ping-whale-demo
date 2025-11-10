@@ -1,28 +1,4 @@
- <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label>Email</label>
-        <input formControlName="email" type="email" />
-        <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
-          <div *ngIf="loginForm.get('email')?.errors?.['required']">Email zorunlu</div>
-          <div *ngIf="loginForm.get('email')?.errors?.['email']">Geçerli bir email girin</div>
-        </div>
-      </div>
-
-      <div>
-        <label>Password</label>
-        <input formControlName="password" type="password" />
-        <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-          <div *ngIf="loginForm.get('password')?.errors?.['required']">Şifre zorunlu</div>
-          <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Şifre en az 6 karakter olmalı</div>
-        </div>
-      </div>
-
-      <div class="api-error" >{{ apiError() }}</div>
-
-      <button type="submit" [disabled]="loginForm.invalid">Login</button>
-</form> -->
-
- <!-- ====== Login Start ====== -->
+<!-- ====== Login Start ====== -->
     <section class="ud-login">
       <div class="container">
         <div class="row">
@@ -39,8 +15,8 @@
                     formControlName="email"
                   />
                   <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
-                    <div *ngIf="loginForm.get('email')?.errors?.['required']">Email zorunlu</div>
-                    <div *ngIf="loginForm.get('email')?.errors?.['email']">Geçerli bir email girin</div>
+                    <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+                    <div *ngIf="loginForm.get('email')?.errors?.['email']">Please enter a valid Email.</div>
                   </div>
                 </div>
                 <div class="ud-form-group">
@@ -50,8 +26,8 @@
                     formControlName="password"
                   />
                   <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-                    <div *ngIf="loginForm.get('password')?.errors?.['required']">Şifre zorunlu</div>
-                    <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Şifre en az 6 karakter olmalı</div>
+                    <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is Required.</div>
+                    <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password should be at least 6 character.</div>
                   </div>
                 </div>
                 <div class="api-error" >{{ apiError() }}</div>
