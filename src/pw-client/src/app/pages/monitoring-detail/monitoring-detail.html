@@ -1,0 +1,43 @@
+<div class="monitoring-detail" *ngIf="monitoring">
+  <div class="detail-header">
+    <h2>
+      {{ monitoring.name }}
+      <span class="status-badge" [ngClass]="{'up': monitoring.stepStatus == 'Success', 'down': monitoring.stepStatus == 'Error'}">
+        {{ monitoring.stepStatusText }}
+      </span>
+    </h2>
+    <div class="url">
+      <a [href]="monitoring.url" target="_blank">{{ monitoring.url }}</a>
+    </div>
+  </div>
+
+  <div class="charts-container">
+    <div class="chart-card">
+      <apx-chart
+        [series]="monitoring.uptimeChart.series"
+        [chart]="monitoring.uptimeChart.chart"
+        [stroke]="monitoring.uptimeChart.stroke"
+        [fill]="monitoring.uptimeChart.fill"
+        [colors]="[monitoring.stepStatus == 'Success' ? '#4caf50' : '#f44336']"
+        [title]="monitoring.uptimeChart.title"
+        [subtitle]="monitoring.uptimeChart.subtitle"
+        class="chart"
+        height="140"
+      ></apx-chart>
+    </div>
+
+    <div class="chart-card">
+      <apx-chart
+        [series]="monitoring.loadtimeChart.series"
+        [chart]="monitoring.loadtimeChart.chart"
+        [stroke]="monitoring.loadtimeChart.stroke"
+        [fill]="monitoring.loadtimeChart.fill"
+        [colors]="['#1976d2']"
+        [title]="monitoring.loadtimeChart.title"
+        [subtitle]="monitoring.loadtimeChart.subtitle"
+        class="chart"
+        height="140"
+      ></apx-chart>
+    </div>
+  </div>
+</div>
