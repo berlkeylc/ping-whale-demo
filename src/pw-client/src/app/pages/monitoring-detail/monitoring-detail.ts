@@ -3,20 +3,7 @@ import { MonitoringService } from '../../core/services/monitoring.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgApexchartsModule } from 'ng-apexcharts';
-
-interface Monitoring {
-  monitorId: string;
-  name: string;
-  url: string;
-  stepStatus: string;
-  stepStatusText: string;
-  upTime: number;
-  loadTime: number;
-  upTimes: number[];
-  loadTimes: number[];
-  uptimeChart?: any;
-  loadtimeChart?: any;
-}
+import { Monitoring } from '../../core/models/Monitoring';
 
 @Component({
   selector: 'app-monitoring-detail',
@@ -37,28 +24,24 @@ export class MonitoringDetail implements OnInit {
     const monitorId = this.route.snapshot.params['monitorId'];
     try {
       const response = await this.monitoringService.getById(monitorId);
-      if (response) {
-        this.monitoring = response.monitors[0];
-        this.setupCharts();
+      if (response && response.monitors && response.monitors.length > 0) {
+        const monitor = response.monitors[0];
+        this.monitoring = {
+          ...monitor,
+          uptimeChart: this.createChart(
+            `${monitor.upTime.toFixed(2)} %`,
+            'Uptime',
+            monitor.upTimes
+          ),
+          loadtimeChart: this.createChart(
+            `${monitor.loadTime.toFixed(2)} ms`,
+            'Load Time',
+            monitor.loadTimes
+          )
+        };
       }
     } catch (error) {
       console.error('Error fetching monitoring details:', error);
-    }
-  }
-
-  private setupCharts() {
-    if (this.monitoring) {
-      this.monitoring.uptimeChart = this.createChart(
-        `${this.monitoring.upTime.toFixed(2)} %`,
-        'Uptime',
-        this.monitoring.upTimes
-      );
-      
-      this.monitoring.loadtimeChart = this.createChart(
-        `${this.monitoring.loadTime.toFixed(2)} ms`,
-        'Load Time',
-        this.monitoring.loadTimes
-      );
     }
   }
 

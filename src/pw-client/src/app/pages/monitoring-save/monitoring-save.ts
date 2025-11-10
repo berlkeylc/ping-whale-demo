@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MonitoringService } from '../../core/services/monitoring.service';
+import { SaveMonitorRequest } from '../../core/models/SaveMonitorRequest';
 
 interface SubscriptionFeature {
   name: string;
@@ -13,12 +14,6 @@ interface Subscription {
   features: SubscriptionFeature[];
 }
 
-interface SaveMonitorRequest {
-  Id?: number;
-  Name: string;
-  Url: string;
-}
-
 @Component({
   selector: 'app-monitoring-save',
   imports: [CommonModule, FormsModule],
@@ -26,9 +21,8 @@ interface SaveMonitorRequest {
   styleUrl: './monitoring-save.scss',
 })
 export class MonitoringSave implements OnInit {
-
-   loading = true;
-  model: SaveMonitorRequest = { Name: '', Url: '' };
+  loading = true;
+  model: SaveMonitorRequest = { name: '', url: '' };
   subscription: Subscription | null = null;
   noquota = false;
   feature: SubscriptionFeature | null = null;
@@ -40,22 +34,37 @@ export class MonitoringSave implements OnInit {
   ) {}
 
   get title(): string {
-    return this.route.snapshot.params['id'] ? this.model.Name : 'New Monitoring';
+    return this.route.snapshot.params['id'] ? this.model.name : 'New Monitoring';
   }
 
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.params['id'];
     if (id) {
-          // Dummy service call
-      const result = await this.fakeGetMonitoring(id);
-      this.loading = false;
-      if (result.success) {
-        this.model.Name = result.data.name;
-        this.model.Url = result.data.url;
+      try {
+        // Real service call to fetch monitor details
+        const response = await this.monitoringService.getById(id);
+        this.loading = false;
+        if (response && response.monitors && response.monitors.length > 0) {
+          const monitor = response.monitors[0];
+          this.model = {
+            id: monitor.monitorId,
+            name: monitor.name,
+            url: monitor.url
+          };
+        }
+      } catch (error) {
+        console.error('Error fetching monitor:', error);
+        this.loading = false;
+        // Fallback to dummy data if service fails
+        const result = await this.fakeGetMonitoring(id);
+        if (result.success) {
+          this.model.name = result.data.name;
+          this.model.url = result.data.url;
+        }
       }
     } else {
       this.loading = false;
-      // Dummy service call
+      // Dummy service call for subscription (can be replaced with real service later)
       this.subscription = await this.fakeGetSubscription();
       this.feature = this.subscription.features.find(f => f.name === 'MONITOR') || null;
 
@@ -67,19 +76,18 @@ export class MonitoringSave implements OnInit {
   }
 
   async save(): Promise<void> {
-    const id = this.route.snapshot.params['id'];
-    if (id) {
-      this.model.Id = +id;
-    }
-  
-    const result = await this.monitoringService.save(this.model);
-    if (result) {
-      this.router.navigate(['dashboard']);
+    try {
+      const result = await this.monitoringService.save(this.model);
+      if (result && result.id) {
+        this.router.navigate(['dashboard']);
+      }
+    } catch (error) {
+      console.error('Error saving monitor:', error);
     }
   }
 
-  // Dummy Service Methods
-  private async fakeGetMonitoring(id: number) {
+  // Dummy Service Methods (can be removed when real services are available)
+  private async fakeGetMonitoring(id: string) {
     return {
       success: true,
       data: { id, name: 'Demo Project', url: 'https://example.com' }
@@ -91,6 +99,4 @@ export class MonitoringSave implements OnInit {
       features: [{ name: 'MONITOR', valueRemained: 2 }]
     };
   }
-   // Dummy Service Methods
-
 }

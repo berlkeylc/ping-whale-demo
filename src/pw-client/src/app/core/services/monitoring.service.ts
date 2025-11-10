@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseHttpService } from './base-http.service';
 import { GetMonitorsRequest } from '../models/GetMonitorsRequest';
+import { GetMonitorsResponse } from '../models/GetMonitorsResponse';
+import { SaveMonitorRequest } from '../models/SaveMonitorRequest';
+import { SaveMonitorResponse } from '../models/SaveMonitorResponse';
 
 @Injectable({ providedIn: 'root' })
 export class MonitoringService extends BaseHttpService {
@@ -9,22 +12,22 @@ export class MonitoringService extends BaseHttpService {
     super(http);
   }
 
-  async save(model: any): Promise<any> {
-    return await this.postRequest('/monitoring', model);
+  async save(model: SaveMonitorRequest): Promise<SaveMonitorResponse> {
+    return await this.postRequest<SaveMonitorResponse>('/monitoring', model);
   }
 
-  async get(): Promise<any> {
-    return await this.getRequest('/monitoring');
+  async get(): Promise<GetMonitorsResponse> {
+    return await this.getRequest<GetMonitorsResponse>('/monitoring');
   }
 
-  async getById(monitorId: string): Promise<any> {
+  async getById(monitorId: string): Promise<GetMonitorsResponse> {
     const request: GetMonitorsRequest = {
       UserId: "",
       MonitorId: monitorId
     };
 
     const params = this.buildParams({ request: JSON.stringify(request) });
-    return await this.getRequest(`/monitoring/${monitorId}`, {
+    return await this.getRequest<GetMonitorsResponse>(`/monitoring/${monitorId}`, {
       params: params
     });
   }
