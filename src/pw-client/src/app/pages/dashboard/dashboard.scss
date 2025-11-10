@@ -104,3 +104,88 @@
   font-size: 16px;
   margin-right: 4px;
 }
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  min-height: 400px;
+}
+
+.empty-state .material-icons {
+  font-size: 64px;
+  width: 64px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #333;
+}
+
+.empty-state p {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 24px 0;
+  max-width: 400px;
+}
+
+
+/* Error State */
+.error-state .material-icons {
+  color: #f44336;
+}
+
+.error-state h3 {
+  color: #f44336;
+}
+
+/* Buttons */
+.btn-add-monitor,
+.btn-retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-add-monitor:hover,
+.btn-retry:hover {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+}
+
+.btn-add-monitor:active,
+.btn-retry:active {
+  transform: translateY(0);
+}
+
+.btn-add-monitor .material-icons,
+.btn-retry .material-icons {
+  font-size: 20px;
+  margin: 0;
+  color: white;
+}
+
+.btn-retry {
+  background-color: #ff9800;
+}
+
+.btn-retry:hover {
+  background-color: #f57c00;
+}

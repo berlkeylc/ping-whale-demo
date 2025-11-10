@@ -15,7 +15,8 @@ import { Monitoring } from '../../core/models/Monitoring';
 })
 export class DashboardComponent implements OnInit {
   monitorings: Monitoring[] = [];
-  
+  hasError = false;
+
   constructor(
     private auth: AuthService,
     private monitoringService: MonitoringService,
@@ -23,9 +24,15 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    await this.loadMonitorings();
+  }
+
+  async loadMonitorings() {
+    this.hasError = false;
     try {
       const response = await this.monitoringService.get();
       if (response && response.monitors) {
+        this.monitorings = [];
         response.monitors.forEach(monitor => {
           const monitoring: Monitoring = {
             ...monitor,
@@ -37,7 +44,16 @@ export class DashboardComponent implements OnInit {
       }
     } catch (error) {
       console.error('Error fetching monitorings:', error);
+      this.hasError = true;
     }
+  }
+
+  get hasData(): boolean {
+    return this.monitorings.length > 0;
+  }
+
+  navigateToAddMonitor() {
+    this.router.navigate(['/monitoring-save']);
   }
 
 
@@ -63,7 +79,7 @@ export class DashboardComponent implements OnInit {
   }
 
   editMonitor(monitorId: string, event: Event): void {
-    event.stopPropagation(); // Card'ın routerLink'inin tetiklenmesini engelle
+    event.stopPropagation(); 
     this.router.navigate(['/monitoring-save'], {
       queryParams: { id: monitorId }
     });

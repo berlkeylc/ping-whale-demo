@@ -4,7 +4,30 @@
     All Monitorings
   </h2>
 
-  <div class="monitorings-grid">
+  <!-- Error State -->
+  <div *ngIf="hasError" class="empty-state error-state">
+    <span class="material-icons">error_outline</span>
+    <h3>Error Loading Monitorings</h3>
+    <p>We couldn't load your monitorings. Please try again.</p>
+    <button class="btn-retry" (click)="loadMonitorings()">
+      <span class="material-icons">refresh</span>
+      Try Again
+    </button>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!hasError && !hasData" class="empty-state">
+    <span class="material-icons">monitoring</span>
+    <h3>No Monitorings Yet</h3>
+    <p>Get started by creating your first monitoring to track your websites and APIs.</p>
+    <button class="btn-add-monitor" (click)="navigateToAddMonitor()">
+      <span class="material-icons">add</span>
+      Add New Monitoring
+    </button>
+  </div>
+
+  <!-- Data Grid -->
+  <div *ngIf="!hasError && hasData" class="monitorings-grid">
     <div class="monitor-card" *ngFor="let item of monitorings" 
          [routerLink]="['/monitoring-detail', item.monitorId]"
          style="cursor: pointer;">
