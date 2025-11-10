@@ -1,0 +1,34 @@
+<div class="monitoring-form">
+
+  <div *ngIf="loading" class="placeholder-container">
+    <div class="placeholder-line" *ngFor="let line of [1,2,3]"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <h2 class="page-title">{{ title }}</h2>
+
+    <!-- Quota warning -->
+    <div *ngIf="noquota" class="alert-warning">
+      <span class="icon">!</span>
+      You don't have enough quota to add new monitor. If you want to buy more, please change your subscription.
+    </div>
+     <!-- Quota warning -->
+
+    <div *ngIf="!noquota" class="form-container">
+      <div class="form-group">
+        <label>Project Name</label>
+        <input type="text" [(ngModel)]="model.Name" placeholder="Type your project name">
+      </div>
+
+      <div class="form-group">
+        <label>Project Url</label>
+        <input type="text" [(ngModel)]="model.Url" placeholder="Type your website url for test">
+      </div>
+
+      <button class="btn-save" (click)="save()">
+        Save
+      </button>
+    </div>
+  </div>
+
+</div>
