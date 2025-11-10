@@ -62,4 +62,8 @@ export class MonitoringSave implements OnInit {
     }
   }
 
+  cancel(): void {
+    this.router.navigate(['dashboard']);
+  }
+
 }
