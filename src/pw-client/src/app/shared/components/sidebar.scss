@@ -1,0 +1,58 @@
+.sidenav {
+  width: 250px;
+  background-color: #1f2937; /* koyu tema örnek */
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  padding-top: 20px;
+  overflow-y: auto;
+}
+
+.sidenav-inner {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidenav-item {
+  margin: 0;
+}
+
+.sidenav-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+  cursor: pointer;  
+}
+
+.sidenav-link:hover,
+.sidenav-link.active {
+  background-color: #334155;
+  color: #fff;
+}
+
+.sidenav-divider {
+  height: 1px;
+  background-color: #475569;
+  margin: 8px 0;
+}
+
+.material-icons {
+  font-size: 22px;
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.sidenav-logout{
+  margin-top: auto !important;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+
+}

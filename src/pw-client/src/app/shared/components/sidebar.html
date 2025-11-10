@@ -1,0 +1,56 @@
+<div id="layout-sidenav" class="sidenav sidenav-vertical layout-sidenav">
+  <ul class="sidenav-inner py-1">
+
+    <!-- Logo (divider üstüne) -->
+    <li class="sidenav-item sidenav-logo">
+      <a class="sidenav-link d-flex align-items-center" >
+        <span class="sidenav-logo-icon mr-2" aria-hidden="true">
+          <!-- Basit balina SVG ikonu -->
+          <svg width="50" height="50" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ping Whale logo">
+            <title>Ping Whale</title>
+            <path d="M4 36c0 0 6-10 22-10s22 10 22 10 6 0 10-6c0 0-2 18-20 22-18 4-22-6-34-16 0 0 2-2 0-0z" fill="#1976d2"/>
+            <path d="M52 18c-4-2-10-3-16-3s-12 1-16 3c0 0 4 6 16 6s16-6 16-6z" fill="#90caf9"/>
+            <circle cx="20" cy="26" r="2.5" fill="#ffffff"/>
+          </svg>
+        </span>
+        <span class="sidenav-logo-text font-weight-bold" style="font-size: 18px; margin-left: 5px;">Ping Whale</span>
+      </a>
+    </li>
+
+    <ng-container *ngFor="let route of routes; let i = index">
+      <!-- Divider -->
+      <li *ngIf="route.divider" class="sidenav-divider mt-0 mb-0"></li>
+
+      <!-- Route item -->
+      <li *ngIf="!route.divider && !route.hidden" class="sidenav-item">
+        <a
+          *ngIf="!route.component"
+          class="sidenav-link"
+          [href]="route.path"
+        >
+          <span class="material-icons mr-2">{{ route.icon }}</span>
+          <span>{{ route.display }}</span>
+        </a>
+        <a
+          *ngIf="route.component"
+          class="sidenav-link"
+          [routerLink]="[route.name]"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <span class="material-icons mr-2">{{ route.icon }}</span>
+          <span>{{ route.display }}</span>
+        </a>
+      </li>
+    </ng-container>
+
+    <!-- Logout (sayfanın en altında olacak şekilde) -->
+    <li class="sidenav-item mt-auto sidenav-logout">
+      <a class="sidenav-link" (click)="logout()" >
+        <span class="material-icons mr-2" aria-hidden="true">logout</span>
+        <span>Logout</span>
+      </a>
+    </li>
+
+  </ul>
+</div>
