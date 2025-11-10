@@ -21,27 +21,30 @@ export class MonitoringDetail implements OnInit {
   ) {}
 
   async ngOnInit() {
-    const monitorId = this.route.snapshot.params['monitorId'];
-    try {
-      const response = await this.monitoringService.getById(monitorId);
-      if (response && response.monitors && response.monitors.length > 0) {
-        const monitor = response.monitors[0];
-        this.monitoring = {
-          ...monitor,
-          uptimeChart: this.createChart(
-            `${monitor.upTime.toFixed(2)} %`,
-            'Uptime',
-            monitor.upTimes
-          ),
-          loadtimeChart: this.createChart(
-            `${monitor.loadTime.toFixed(2)} ms`,
-            'Load Time',
-            monitor.loadTimes
-          )
-        };
+    const monitorId = this.route.snapshot.queryParams['id'] || this.route.snapshot.queryParams['monitorId'];
+    
+    if (monitorId) {
+      try {
+        const response = await this.monitoringService.getById(monitorId);
+        if (response && response.monitors && response.monitors.length > 0) {
+          const monitor = response.monitors[0];
+          this.monitoring = {
+            ...monitor,
+            uptimeChart: this.createChart(
+              `${monitor.upTime.toFixed(2)} %`,
+              'Uptime',
+              monitor.upTimes
+            ),
+            loadtimeChart: this.createChart(
+              `${monitor.loadTime.toFixed(2)} ms`,
+              'Load Time',
+              monitor.loadTimes
+            )
+          };
+        }
+      } catch (error) {
+        console.error('Error fetching monitoring details:', error);
       }
-    } catch (error) {
-      console.error('Error fetching monitoring details:', error);
     }
   }
 

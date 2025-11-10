@@ -19,7 +19,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'monitoring-detail/:monitorId', component: MonitoringDetail },
+      { path: 'monitoring-detail', component: MonitoringDetail },
       { path: 'monitoring-save', component: MonitoringSave },
     ]
   },

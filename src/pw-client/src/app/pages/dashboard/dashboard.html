@@ -29,7 +29,8 @@
   <!-- Data Grid -->
   <div *ngIf="!hasError && hasData" class="monitorings-grid">
     <div class="monitor-card" *ngFor="let item of monitorings" 
-         [routerLink]="['/monitoring-detail', item.monitorId]"
+         [routerLink]="['/monitoring-detail']"
+         [queryParams]="{ id: item.monitorId }"
          style="cursor: pointer;">
       <div class="card-headerx">
         <div class="card-title">
