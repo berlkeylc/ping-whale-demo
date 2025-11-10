@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MonitoringService } from '../../core/services/monitoring.service';
 import { SaveMonitorRequest } from '../../core/models/SaveMonitorRequest';
+import { SpinnerService } from '../../core/services/spinner.service';
 
 
 
@@ -19,7 +20,8 @@ export class MonitoringSave implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private monitoringService: MonitoringService
+    private monitoringService: MonitoringService,
+    private spinnerService: SpinnerService
   ) {}
 
   get title(): string {
@@ -49,6 +51,9 @@ export class MonitoringSave implements OnInit {
   async save(): Promise<void> {
     try {
       const result = await this.monitoringService.save(this.model);
+      this.spinnerService.show();
+      await new Promise(resolve => setTimeout(resolve, 500)); 
+      this.spinnerService.hide();
       if (result && result.id) {
         this.router.navigate(['dashboard']);
       }
