@@ -22,6 +22,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^20.3.10",
     "@angular/cdk": "^20.2.11",
     "@angular/common": "^20.3.0",
     "@angular/compiler": "^20.3.0",
@@ -33,6 +34,7 @@
     "apexcharts": "^5.3.6",
     "jquery": "^3.7.1",
     "ng-apexcharts": "^2.0.3",
+    "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

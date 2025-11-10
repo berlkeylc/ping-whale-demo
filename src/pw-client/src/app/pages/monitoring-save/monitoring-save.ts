@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MonitoringService } from '../../core/services/monitoring.service';
 import { SaveMonitorRequest } from '../../core/models/SaveMonitorRequest';
 import { SpinnerService } from '../../core/services/spinner.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -26,6 +27,7 @@ export class MonitoringSave implements OnInit {
     private route: ActivatedRoute,
     private monitoringService: MonitoringService,
     private spinnerService: SpinnerService,
+    private toastr: ToastrService,
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
@@ -115,9 +117,14 @@ export class MonitoringSave implements OnInit {
       await new Promise(resolve => setTimeout(resolve, 500)); 
       this.spinnerService.hide();
       if (result && result.id) {
+        const message = this.isEditMode 
+          ? 'Monitoring updated successfully!' 
+          : 'Monitoring created successfully!';
+        this.toastr.success(message, 'Success');
         this.router.navigate(['dashboard']);
       }
     } catch (error) {
+      // Error interceptor will handle the error alert
       console.error('Error saving monitor:', error);
     }
   }
