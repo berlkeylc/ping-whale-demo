@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PW.Application\PW.Application.csproj" />
+    <ProjectReference Include="..\PW.Infrastructure\PW.Infrastructure.csproj" />
     <ProjectReference Include="..\PW.Persistence\PW.Persistence.csproj" />
   </ItemGroup>
 
