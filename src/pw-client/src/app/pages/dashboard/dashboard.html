@@ -10,7 +10,7 @@
          style="cursor: pointer;">
       <div class="card-headerx">
         <div class="card-title">
-          <span class="status-badge" [ngClass]="{'up': item.stepStatus == '3', 'down': item.stepStatus == '6'}">
+          <span class="status-badge" [ngClass]="{'up': item.stepStatus == 'Success', 'down': item.stepStatus == 'Error'}">
             {{ item.stepStatusText }}
           </span>
           <h3>{{ item.name }}</h3>
