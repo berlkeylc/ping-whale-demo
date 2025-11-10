@@ -16,7 +16,9 @@
           <h3>{{ item.name }}</h3>
         </div>
         <div class="card-actions">
-          <button title="Edit"><span class="material-icons">edit</span></button>
+          <button title="Edit" (click)="editMonitor(item.monitorId, $event)">
+            <span class="material-icons">edit</span>
+          </button>
         </div>
       </div>
 

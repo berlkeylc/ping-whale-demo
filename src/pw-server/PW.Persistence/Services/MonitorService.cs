@@ -45,7 +45,7 @@ public class MonitorService : IMonitorService
         if (monitor.MonitorId != Guid.Empty)
         {
             entity = await _dbContext.Monitors
-                .FirstOrDefaultAsync(x => x.MonitorId == monitor.MonitorId && x.UserId == monitor.UserId);
+                .FirstOrDefaultAsync(x => x.MonitorId == monitor.MonitorId && x.UserId.ToString() == userId);
 
             if (entity == null)
                 throw new InvalidOperationException("Monitor not found.");

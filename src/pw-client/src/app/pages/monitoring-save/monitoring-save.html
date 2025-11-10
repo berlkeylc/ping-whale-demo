@@ -1,18 +1,8 @@
 <div class="monitoring-form">
 
-  <div *ngIf="loading" class="placeholder-container">
-    <div class="placeholder-line" *ngFor="let line of [1,2,3]"></div>
-  </div>
-
-  <div *ngIf="!loading">
+  <div>
     <h2 class="page-title">{{ title }}</h2>
 
-    <!-- Quota warning -->
-    <div *ngIf="noquota" class="alert-warning">
-      <span class="icon">!</span>
-      You don't have enough quota to add new monitor. If you want to buy more, please change your subscription.
-    </div>
-     <!-- Quota warning -->
 
     <div *ngIf="!noquota" class="form-container">
       <div class="form-group">
