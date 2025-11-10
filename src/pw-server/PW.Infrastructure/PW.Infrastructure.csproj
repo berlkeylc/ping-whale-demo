@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PW.Application\PW.Application.csproj" />
+    <ProjectReference Include="..\PW.Persistence\PW.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>
