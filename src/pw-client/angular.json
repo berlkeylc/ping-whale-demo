@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pw-client": {
+    "ping-whale-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -27,10 +27,39 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/css",
+                "output": "/assets/css"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/fonts",
+                "output": "/assets/fonts"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/images",
+                "output": "/assets/images"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/js",
+                "output": "/assets/js"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/scss",
+                "output": "/assets/scss"
               }
             ],
             "styles": [
               "src/styles.scss"
+            
+            ],
+            "scripts": [
+                "node_modules/jquery/dist/jquery.min.js"
             ]
           },
           "configurations": {
@@ -61,10 +90,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "pw-client:build:production"
+              "buildTarget": "ping-whale-web:build:production"
             },
             "development": {
-              "buildTarget": "pw-client:build:development"
+              "buildTarget": "ping-whale-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,10 +114,39 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/css",
+                "output": "/assets/css"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/fonts",
+                "output": "/assets/fonts"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/images",
+                "output": "/assets/images"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/js",
+                "output": "/assets/js"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets/scss",
+                "output": "/assets/scss"
               }
             ],
             "styles": [
               "src/styles.scss"
+          
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
             ]
           }
         }
