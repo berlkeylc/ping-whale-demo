@@ -1,0 +1,55 @@
+<section class="ud-login">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="ud-login-wrapper">
+              <div class="ud-login-logo">
+                <img src="assets/images/logo/logo-2.png" alt="logo" />
+              </div>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="ud-login-form">
+                <div class="ud-form-group">
+                  <input
+                    type="email"
+                    placeholder="Email/username"
+                    formControlName="email"
+                  />
+        <div class="error" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">Email zorunlu</div>
+          <div *ngIf="registerForm.get('email')?.errors?.['email']">Geçerli bir email girin</div>
+        </div>
+                </div>
+                <div class="ud-form-group">
+                    <input
+                        type="password"
+                        placeholder="*********"
+                        formControlName="password"
+                    />
+                    <div class="error" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+                    <div *ngIf="registerForm.get('password')?.errors?.['required']">Şifre zorunlu</div>
+                    <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Şifre en az 6 karakter olmalı</div>
+                    </div>
+                </div>
+                 <div class="ud-form-group">
+                    <input
+                        type="password"
+                        placeholder="*********"
+                        formControlName="confirmPassword"
+                    />
+                       <div class="error" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.hasError('passwordMismatch')">
+                        Şifreler eşleşmiyor
+                        </div>
+                </div>
+                <div class="api-error" >{{ apiError() }}</div>
+                <div class="ud-form-group">
+                  <button type="submit" class="ud-main-btn w-100" [disabled]="registerForm.invalid">Login</button>
+                </div>
+              </form>
+              <p class="signup-option">
+                Already have an account? <a href="login"> Sign Up </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ====== Login End ====== -->
