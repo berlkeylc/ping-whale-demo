@@ -30,6 +30,11 @@ namespace PW.API.Controllers;
         [HttpPost]
         public async Task<IActionResult> Post(SaveMonitorRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
             SaveMonitorResponse response = await _mediator.Send(request);
             return Ok(response);
         }

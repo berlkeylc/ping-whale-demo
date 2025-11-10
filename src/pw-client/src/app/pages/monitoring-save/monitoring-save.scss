@@ -103,6 +103,33 @@
   opacity: 0.7;
 }
 
+.form-input.error {
+  border-color: #f44336;
+}
+
+.form-input.error:focus {
+  border-color: #f44336;
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.btn-save:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-save:disabled:hover {
+  background-color: #ccc;
+  transform: none;
+}
+
 /* Form Actions */
 .form-actions {
   display: flex;
