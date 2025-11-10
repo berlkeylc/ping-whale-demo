@@ -8,4 +8,5 @@ namespace PW.Application.Abstractions;
         Task<string> RegisterAsync(string email, string password);
         Task<string> LoginAsync(string email, string password);
         Task<string> GenerateJwtToken(PWUser user);
+        Guid? UserId { get; }
     }
