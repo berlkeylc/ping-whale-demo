@@ -1,5 +1,7 @@
 using System;
+using System.Security.Claims;
 using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using PW.Application.Abstractions;
 using PW.Application.DTOS;
@@ -11,14 +13,19 @@ namespace PW.Persistence.Services;
 
 public class MonitorService : IMonitorService
 {
-     private readonly PWDbContext _dbContext;
+    private readonly PWDbContext _dbContext;
+     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public MonitorService(PWDbContext dbContext)
+    public MonitorService(PWDbContext dbContext, IHttpContextAccessor httpContextAccessor)
     {
         _dbContext = dbContext;
+        _httpContextAccessor = httpContextAccessor;
     }
     public async Task<PWMonitor> CreateMonitorAsync(PWMonitor monitor, string urlx)
     {
+        var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("sub")?.Value
+                    ?? _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                      
         if (monitor == null)
             throw new ArgumentNullException(nameof(monitor));
 
@@ -52,7 +59,7 @@ public class MonitorService : IMonitorService
             {
                 MonitorId = Guid.NewGuid(),
                 Name = monitor.Name,
-                UserId = monitor.UserId,
+                UserId = userId != null ? Guid.Parse(userId) : Guid.Empty,
                 CreatedDate = DateTime.UtcNow
             };
 

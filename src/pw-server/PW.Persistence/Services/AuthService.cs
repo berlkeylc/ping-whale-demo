@@ -2,6 +2,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,11 +15,13 @@ public class AuthService : IAuthService
 {
     private readonly UserManager<PWUser> _userManager;
     private readonly IConfiguration _configuration;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-     public AuthService(UserManager<PWUser> userManager, IConfiguration configuration)
+    public AuthService(UserManager<PWUser> userManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
     {
         _userManager = userManager;
         _configuration = configuration;
+        _httpContextAccessor = httpContextAccessor;
     }
 
 
@@ -62,32 +65,43 @@ public class AuthService : IAuthService
     }
 
     public async Task<string> GenerateJwtToken(PWUser user)
+    {
+        var claims = new List<Claim>
         {
-            var claims = new List<Claim>
-            {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
                 new Claim(ClaimTypes.Email, user.Email ?? string.Empty)
             };
 
-            var keyString = _configuration["Jwt:Key"];
-            if (string.IsNullOrEmpty(keyString))
-                throw new InvalidOperationException("Jwt:Key is not configured.");
+        var keyString = _configuration["Jwt:Key"];
+        if (string.IsNullOrEmpty(keyString))
+            throw new InvalidOperationException("Jwt:Key is not configured.");
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var issuer = _configuration["Jwt:Issuer"];
-            var audience = _configuration["Jwt:Audience"];
+        var issuer = _configuration["Jwt:Issuer"];
+        var audience = _configuration["Jwt:Audience"];
 
-            var token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
-                claims: claims,
-                expires: DateTime.UtcNow.AddDays(7),
-                signingCredentials: creds
-            );
+        var token = new JwtSecurityToken(
+            issuer: issuer,
+            audience: audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddDays(7),
+            signingCredentials: creds
+        );
 
-            return await Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
+        return await Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
+    }
+        
+        public Guid? UserId
+    {
+        get
+        {
+            var userId = _httpContextAccessor.HttpContext?.User?.FindFirst("sub")?.Value
+                      ?? _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            return userId != null ? Guid.Parse(userId) : null;
         }
+    }
 
 }
