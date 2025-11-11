@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ping-whale-web": {
+    "pw-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -90,10 +90,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "ping-whale-web:build:production"
+              "buildTarget": "pw-client:build:production"
             },
             "development": {
-              "buildTarget": "ping-whale-web:build:development"
+              "buildTarget": "pw-client:build:development"
             }
           },
           "defaultConfiguration": "development"

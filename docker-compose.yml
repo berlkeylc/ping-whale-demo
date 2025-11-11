@@ -1,0 +1,43 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: pw-postgres-db
+    ports:
+      - "5432:5432"
+    networks:
+      - mynetwork
+
+  api:
+    build:
+      context: ./src/pw-server
+      dockerfile: Dockerfile
+    container_name: myapi
+    ports:
+      - "7263:80"
+    environment:
+      ConnectionStrings__PostgreSQL: "Host=postgres;Port=5432;Database=pw-postgres-db;Username=postgres;Password=123456"
+      Jwt__Key: "b3rk3Yalc1nerSuperSecretJwtKey2025@Secure!"
+      ASPNETCORE_URLS: "http://+:80"
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+
+  angular:
+    build: ./src/pw-client
+    container_name: angular-app
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

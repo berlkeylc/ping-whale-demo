@@ -8,6 +8,8 @@ using System.Reflection;
 using PW.Application.Features.Auth.Register;
 using PW.API.Extensions;
 using PW.Infrastructure;
+using PW.Persistence.Context;
+using Microsoft.EntityFrameworkCore;
 
 Env.Load();
 var builder = WebApplication.CreateBuilder(args);
@@ -80,11 +82,16 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-
-
+// Apply pending migrations at startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<PWDbContext>();
+    db.Database.Migrate();
+}
+// Apply pending migrations at startup
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (true)
 {
     app.MapOpenApi();
 
