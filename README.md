@@ -3,7 +3,7 @@
 Ping Whale is a **modern web monitoring application** that helps you track uptime, response time, and performance of your websites in real time.  
 It features a clean UI built with **Angular** and a robust **.NET Core API** backend, both containerized using Docker.
 
-![Ping Whale Landing Page](src\pw-client\src\assets\images\hero\hero-image.png)
+![Ping Whale Landing Page](https://github.com/berlkeylc/ping-whale-demo/blob/main/src/pw-client/src/assets/images/hero/hero-image.png)
 
 ---
 
