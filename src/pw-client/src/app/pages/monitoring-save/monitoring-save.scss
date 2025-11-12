@@ -11,13 +11,33 @@
 .page-title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 24px;
+  margin: 0 0 24px 0;
+  padding: 0;
   display: flex;
   align-items: center;
   gap: 8px;
   width: 100%;
   justify-content: flex-start;
   align-self: flex-start;
+  box-sizing: border-box;
+}
+
+.page-title .material-icons {
+  margin-left: 0;
+}
+
+// Mobile styles
+@media (max-width: 767px) {
+  .monitoring-save-container {
+    padding: 60px 15px 20px 15px;
+    align-items: flex-start;
+  }
+  
+  .page-title {
+    margin: 0 0 24px 0;
+    padding: 0;
+    width: 100%;
+  }
 }
 
 /* Form Card */

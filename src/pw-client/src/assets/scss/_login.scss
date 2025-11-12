@@ -36,6 +36,44 @@
   }
 }
 
+@media (max-width: 767px) {
+  .ud-login .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .ud-login .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ud-login .col-lg-12 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ud-login-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 40px 15px !important;
+    margin: 0 !important;
+    border-radius: 0;
+  }
+
+  .ud-login-form .ud-form-group {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ud-login-form .ud-form-group input {
+    width: 100% !important;
+    box-sizing: border-box;
+    max-width: 100% !important;
+    padding: 12px 15px !important;
+  }
+}
+
 .ud-socials-connect {
   padding-top: 10px;
   padding-bottom: 30px;

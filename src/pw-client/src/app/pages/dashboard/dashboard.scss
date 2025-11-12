@@ -6,13 +6,30 @@
 .dashboard-title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
+  padding: 0;
   display: flex;
   align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .dashboard-title .material-icons {
   margin-right: 8px;
+  margin-left: 0;
+}
+
+// Mobile styles
+@media (max-width: 767px) {
+  .dashboard-container {
+    padding: 60px 15px 20px 15px;
+  }
+  
+  .dashboard-title {
+    margin: 0 0 20px 0;
+    padding: 0;
+    width: 100%;
+  }
 }
 
 /* Grid */
