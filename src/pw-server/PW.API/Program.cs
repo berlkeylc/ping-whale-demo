@@ -14,6 +14,10 @@ using Microsoft.EntityFrameworkCore;
 Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
+// Use Cloud Run PORT environment variable 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080"; 
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 //Define CORS policy to allow Angular client
 builder.Services.AddCors(options =>
 {
@@ -21,8 +25,9 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins("http://localhost:4200") // Angular app adresi
-                .WithOrigins("https://localhost:4200")
+                .WithOrigins(
+                "https://pw-angular-client.web.app", // Prod Angular URL
+                "http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();

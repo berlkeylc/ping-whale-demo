@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:7263/api'  
+  apiUrl: 'https://ping-whale-api-577680104401.europe-west1.run.app/api'  
 };

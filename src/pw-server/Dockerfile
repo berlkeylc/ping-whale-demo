@@ -1,4 +1,6 @@
-# Build stage
+# =========================
+# BUILD STAGE
+# =========================
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
@@ -12,23 +14,27 @@ COPY ["PW.Domain/PW.Domain.csproj", "PW.Domain/"]
 RUN dotnet restore "./pw-server.sln"
 
 COPY . .
-
 WORKDIR /src/PW.API
 RUN dotnet publish -c Release -o /app/publish
 
-# Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+
+# =========================
+# RUNTIME STAGE
+# =========================
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 
+# PostgreSQL client ve netcat ekle (opsiyonel ama faydalı)
 RUN apt-get update && \
     apt-get install -y postgresql-client netcat-openbsd && \
     rm -rf /var/lib/apt/lists/*
 
-COPY PW.API/wait-for-postgres.sh .
 COPY --from=build /app/publish .
 
-RUN chmod +x wait-for-postgres.sh
+# Cloud Run environment port (default 8080)
+ENV ASPNETCORE_URLS=http://0.0.0.0:${PORT}
+ENV PORT=8080
 
-EXPOSE 80
+EXPOSE 8080
 
-ENTRYPOINT ["./wait-for-postgres.sh", "postgres", "dotnet", "PW.API.dll"]
+ENTRYPOINT ["dotnet", "PW.API.dll"]
